@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+    <title>List</title>
+        {% load staticfiles %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<link rel="stylesheet" href="/lib/w3-theme-blue.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<style>
+        .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+
+    /* Add a gray background color and some padding to the footer */
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+
+    </style>
+</head>
+<body class="bg2">
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/tech/question">TechnicalForum</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/tech/profile"><span class="glyphicon glyphicon-log-in"></span> Profile</a></li>
+          <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="w3-card-4">
+<div class="w3-container w3-theme w3-card-2">
+<h1>LeaderBoard</h1>
+</div>
+    <ul class="list-group">
+        {% for record1 in list %}
+        <li class="w3-theme-l3" style="position:relative"> <a class="list-group-item"href="{% url 'tech.views.profile1' record1.user_id_id %}"><b> <img class="img-rounded" height="20" width="20" src={{ record1.photo.url }}/><font color="#dc143c"> {{ record1.user_id.username }}</font></b> :::: <span class="w3-badge">{{ record1.credits }}</span> </a></li>
+        {% endfor %}
+    </ul>
+<br>
+</body>
+</html>
