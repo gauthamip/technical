@@ -85,15 +85,8 @@ WSGI_APPLICATION = 'TechnicalForum.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'dbname4',
-        'USER': 'root',
-        'PASSWORD': 'mrnd',
-        'HOST': 'localhost',
-        'PORT': '3306',
-        'OPTIONS': {
-            'autocommit': True,
-        },
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
@@ -133,27 +126,25 @@ USE_TZ = True
 
 # Parse database configuration from $DATABASE_URL
 import dj_database_url
-DATABASES['default'] =  dj_database_url.config()
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
-STATIC_URL = '/static/'
-
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
-    os.path.join(PROJECT_ROOT, 'static'),
+    os.path.join(BASE_DIR, 'static'),
 )
-# Static files (CSS, JavaScript, Images)
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'# Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 # STATIC_URL = '/static/'
 
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 # STATICFILES_DIRS=[
 #     os.path.join(BASE_DIR,"static"),
@@ -169,4 +160,5 @@ LOGIN_REDIRECT_URL='/tech/question/'
 
 LOGIN_URL='/login/'
 
-
+ALLOWED_HOSTS = ['*']
+DEBUG = False
